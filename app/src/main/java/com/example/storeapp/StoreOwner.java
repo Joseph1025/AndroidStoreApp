@@ -6,6 +6,8 @@ public class StoreOwner extends User {
 
     ArrayList<Order> orderList = new ArrayList<>();
     ArrayList<Product> productList = new ArrayList<>();
+    private String brand;
+    private double price;
     private String store_name;
 
     public StoreOwner() {
@@ -18,7 +20,23 @@ public class StoreOwner extends User {
     public StoreOwner(String name, String password) {
         super(name, password);
     }
-    
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getBrand() {
+        return this.brand;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public double getPrice() {
+        return this.price;
+    }
+
     public void setStore_name(String store_name) {
         this.store_name = store_name;
     }

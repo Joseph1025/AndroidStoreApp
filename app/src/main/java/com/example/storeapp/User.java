@@ -26,3 +26,4 @@ abstract class User {
         this.password = password;
     }
 }
+

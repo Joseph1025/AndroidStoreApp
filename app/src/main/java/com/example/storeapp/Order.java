@@ -44,7 +44,7 @@ public class Order {
         this.customer_order = customer;
     }
 
-    public ArrayList<Product> getProducts() {
+    public ArrayList getProducts() {
         return productList;
     }
 
