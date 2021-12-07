@@ -33,6 +33,12 @@
         </activity>
         <activity android:name=".CustomerOrderMainActivity" />
         <activity android:name=".CustomerSingleOrderMainActivity" />
+        <activity android:name=".MyorderMainActivity" />
+        <activity android:name=".MyproductMainActivity" />
+        <activity android:name=".NewProductMainActivity" />
+        <activity android:name=".OrderdetailMainActivity" />
+        <activity android:name=".ShowproductMainActivity" />
+        <activity android:name=".StoreOwnerMainActivity" />
 
 
     </application>

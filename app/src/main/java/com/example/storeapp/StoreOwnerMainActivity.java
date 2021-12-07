@@ -13,11 +13,12 @@ public class StoreOwnerMainActivity extends AppCompatActivity {
      * my store.
      */
 
-    public String userName = "test_store";
+    public String userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        userName = getIntent().getStringExtra("username");
         setContentView(R.layout.activity_storeownermain);
     }
 
@@ -31,6 +32,15 @@ public class StoreOwnerMainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MyorderMainActivity.class);
         intent.putExtra("username",userName);
         startActivity(intent);
+
+    }
+
+    public void clicklogout(View V){
+        Intent intent = new Intent(this,LoginScreen.class);
+        startActivity(intent);
+    }
+    @Override
+    public void onBackPressed(){
 
     }
 

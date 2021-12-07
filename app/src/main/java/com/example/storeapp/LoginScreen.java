@@ -76,7 +76,8 @@ public class LoginScreen extends AppCompatActivity implements StartUpPresenter.V
     @Override
     public void navigateToStrPage() {
         //change storeOwner_page to navigate to the page u want
-        Intent strPage = new Intent(LoginScreen.this, storeOwner_page.class);
+        Intent strPage = new Intent(LoginScreen.this, StoreOwnerMainActivity.class);
+        strPage.putExtra("username", getUserName());
         startActivity(strPage);
     }
 
