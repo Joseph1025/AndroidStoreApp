@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">StoreApp</string>
+    <string name="customer_page_start">Start your shopping here!</string>
+    <string name="customer_stores">View all Stores</string>
+    <string name="customer_orders">View all Orders</string>
+    <string name="username">Username</string>
+    <string name="button">Button</string>
+    <string name="enter">enter</string>
+    <string name="store_name">store name</string>
+</resources>
