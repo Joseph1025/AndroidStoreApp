@@ -1,5 +1,6 @@
 package com.example.storeapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -32,7 +33,8 @@ public class SignUpScreen extends AppCompatActivity implements StartUpPresenter.
 
                 presenter.getUser(name, password, "Customer");
                 presenter.addUser("Customer");
-
+                Intent back = new Intent(SignUpScreen.this, LoginScreen.class);
+                startActivity(back);
             }
         });
 
@@ -44,14 +46,22 @@ public class SignUpScreen extends AppCompatActivity implements StartUpPresenter.
 
                 presenter.getUser(name, password, "Store Owner");
                 presenter.addUser("Store Owner");
-
+                Intent back = new Intent(SignUpScreen.this, LoginScreen.class);
+                startActivity(back);
             }
         });
     }
 
+//    public String getUserName(){
+//        logName = (EditText)findViewById(R.id.name_input);
+//        return logName.getText().toString();
+//    }
+
     @Override
     public void navigateToCusPage() {
-
+//        Intent cusPage = new Intent(SignUpScreen.this, CustomerMainActivity.class);
+//        cusPage.putExtra("username", getUserName());
+//        startActivity(cusPage);
     }
 
     @Override

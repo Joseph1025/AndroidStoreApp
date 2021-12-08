@@ -56,7 +56,7 @@ public class OrderdetailMainActivity extends AppCompatActivity {
     }
 
     public void storeowner_clickback(View v){
-        Intent intent = new Intent(this, MyorderMainActivity.class);
+        Intent intent = new Intent(this, StoreOwnerMainActivity.class);
         intent.putExtra("username", storename);
         startActivity(intent);
     }
