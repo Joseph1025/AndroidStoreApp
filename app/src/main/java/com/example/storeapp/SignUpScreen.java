@@ -62,15 +62,9 @@ public class SignUpScreen extends AppCompatActivity implements SignUpPresenter.V
     }
 
     @Override
-    public void showEmptyText() {
+    public void displayMessage(String s) {
         TextView hint = (TextView)findViewById(R.id.login_hint_text);
-        hint.setText("user name/ password cannot be empty!");
-    }
-
-    @Override
-    public void signUpSuccess() {
-        TextView hint = (TextView)findViewById(R.id.login_hint_text);
-        hint.setText("signed up successfully");
+        hint.setText(s);
     }
 
     @Override

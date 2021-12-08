@@ -81,21 +81,9 @@ public class LoginScreen extends AppCompatActivity implements LoginPresenter.Vie
     }
 
     @Override
-    public void showEmptyText() {
+    public void displayMessage(String s) {
         TextView hint = (TextView)findViewById(R.id.hint_text);
-        hint.setText("user name/ password cannot be empty!");
-    }
-
-    @Override
-    public void wrongUserName() {
-        TextView hint = (TextView)findViewById(R.id.hint_text);
-        hint.setText("invalid user name, please try again");
-    }
-
-    @Override
-    public void wrongPassword() {
-        TextView hint = (TextView)findViewById(R.id.hint_text);
-        hint.setText("invalid password, please try again");
+        hint.setText(s);
     }
 
     @Override

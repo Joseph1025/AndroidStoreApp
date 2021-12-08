@@ -12,34 +12,20 @@ import com.google.firebase.database.ValueEventListener;
 
 public class LoginPresenter {
     private View view;
-    //private User user;
 
     public LoginPresenter(View view) {
-        //this.user = null;
         this.view = view;
     }
-
-    /*public void getUser(String userType){
-        String name = view.getUserName();
-        String password = view.getPassWord();
-        if(userType == "Customer"){
-            this.user = new Customer(name, password);
-        }else if(userType == "Store Owner"){
-            this.user = new StoreOwner(name, password);
-        }
-    }*/
 
     public void userLogin(String userType){
         String name = view.getUserName();
         String password = view.getPassWord();
 
         if(name.equals("") || password.equals("")){
-            Log.v(name, "hello!!!");
-            view.showEmptyText();
+            view.displayMessage("user name/ password cannot be empty");
         }else{
             FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
             DatabaseReference reference = rootNode.getReference(userType);
-            Log.v(name, "hello!!!");
 
             reference.addListenerForSingleValueEvent(
                 new ValueEventListener(){
@@ -48,7 +34,7 @@ public class LoginPresenter {
                         if (!snapshot.hasChild(name)) {
                             // The child doesn't exist
                             Log.v(name, "you don't exist");
-                            view.wrongUserName();
+                            view.displayMessage("wrong user name, please try again!");
                         }else{
                             if(snapshot.child(name).child("password").getValue().toString().equals(password)){
                                 Log.v(name, "logged in success");
@@ -58,7 +44,7 @@ public class LoginPresenter {
                                     view.navigateToStrPage();
                                 }
                             }else{
-                                view.wrongPassword();
+                                view.displayMessage("wrong password, please try again!");
                             }
                         }
                     }
@@ -73,8 +59,6 @@ public class LoginPresenter {
         String getPassWord();
         void navigateToCusPage();
         void navigateToStrPage();
-        void showEmptyText();
-        void wrongUserName();
-        void wrongPassword();
+        void displayMessage(String s);
     }
 }

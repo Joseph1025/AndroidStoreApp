@@ -40,7 +40,7 @@ public class SignUpPresenter {
         User new_user = this.user;
 
         if(name.equals("") || password.equals("")){
-            view.showEmptyText();
+            view.displayMessage("user name/ password cannot be empty");
         }else{
             reference.addListenerForSingleValueEvent(
                 new ValueEventListener(){
@@ -49,8 +49,7 @@ public class SignUpPresenter {
                         if (!snapshot.hasChild(name)) {
                             Log.v(name, "you don't exist yet");
                             reference.child(name).setValue(new_user);
-                            view.signUpSuccess();
-                            view.navigateToLogin();
+                            view.displayMessage("registered successfully");
                         }else{
                             Log.v(name, "u exist!!!");
                         }
@@ -65,8 +64,7 @@ public class SignUpPresenter {
     public interface View {
         String getUserName();
         String getPassWord();
-        void showEmptyText();
-        void signUpSuccess();
+        void displayMessage(String s);
         void navigateToLogin();
     }
 }
