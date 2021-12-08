@@ -10,9 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StoreApp">
         <activity
-            android:name=".storeOwner_page"
-            android:exported="false" />
-        <activity
             android:name=".SignUpScreen"
             android:exported="false" />
         <activity

@@ -76,17 +76,22 @@ import java.util.ArrayList;
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     for (DataSnapshot child: snapshot.getChildren()) { // traversing at order-key level
                         for (DataSnapshot grandChild: child.getChildren()) { // at certain order
-                            String line = "";
-                            if (grandChild.getKey().equals("customer_order")) {
-                                orders.add("Order from " + grandChild.getValue(String.class));
-                                cusNames.add(grandChild.getValue(String.class));
+                            boolean isComplete = false;
+                            if (grandChild.getKey().equals("status")) {
+                                if (grandChild.getValue(Boolean.class)) {
+                                    isComplete = true;
+                                }
                             }
-//                            if (grandChild.getKey().equals("status")) {
-//                                if (grandChild.getValue(Boolean.class)) {
-//                                    line = line + " is completed";
-//                                }
-//                            }
-                            //orders.add(line);
+                            if (grandChild.getKey().equals("customer_order")) {
+                                cusNames.add(grandChild.getValue(String.class));
+                                orders.add("Order from " + grandChild.getValue(String.class));
+                            }
+
+                            if (isComplete) {
+                                String temp = orders.remove(orders.size() - 1);  // pop out the string newly added
+                                temp = temp.concat(": is complete");
+                                orders.add(temp);
+                            }
 
                         }
                     }

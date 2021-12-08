@@ -11,8 +11,10 @@ public class Product {
     private int amount;
 
     public Product() {
-        this.productName = "";
-        this.description = "";
+        this.productName = " ";
+        this.description = " ";
+        this.price = 0;
+        this.amount = 0;
     }
 
     public Product(String name, String description, int price, int count) {

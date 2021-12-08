@@ -25,9 +25,10 @@ public class ConfirmMainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ConfirmRecyclerAdapter adapter;
     private TextView text;
-    private String storename;
-    private TextView Totalprice;
-    String username;
+    private String storeName;
+    private TextView totalPrice;
+    private String username;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,22 +37,22 @@ public class ConfirmMainActivity extends AppCompatActivity {
         order = ProductMainActivity.products;
         text = (TextView)findViewById(R.id.itemslayout);
         Intent intent = getIntent();
-        storename = intent.getStringExtra("storename");
+        storeName = intent.getStringExtra("storename");
         username = intent.getStringExtra("username");
         TextView textView = findViewById(R.id.confirmstorename);
-        textView.setText(storename);
-        Totalprice =(TextView)findViewById(R.id.confirm_totalprice);
-
-        add_order_to_database(storename, username);
+        textView.setText(storeName);
+        totalPrice =(TextView)findViewById(R.id.confirm_totalprice);
+        add_order_to_database();
 
     }
-    private int CaculateTotalPrice(){
-        int totalprice = 0;
+    private int CalculateTotalPrice(){
+        int totalPrice = 0;
         for (Product p: order){
-            totalprice += p.getPrice()*p.getProductCount();
+            totalPrice += p.getPrice()*p.getProductCount();
         }
-        return totalprice;
+        return totalPrice;
     }
+
     private void setAdapter() {
         this.adapter = new ConfirmRecyclerAdapter(order);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
@@ -62,15 +63,14 @@ public class ConfirmMainActivity extends AppCompatActivity {
 
     public void click_back_store(View v){
         Intent intent = new Intent(this, CustomerMainActivity.class);
-        intent.putExtra("storename", storename);
+        intent.putExtra("storename", storeName);
         intent.putExtra("username", username);
         startActivity(intent);
     }
 
-    private void add_order_to_database(String str, String username){
+    private void add_order_to_database(){
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        Order input = new Order(ProductMainActivity.products, str, username);
-
+        Order input = new Order(ProductMainActivity.products, storeName, username);
         ref.child("Customer").child(username).child("orders").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -84,7 +84,7 @@ public class ConfirmMainActivity extends AppCompatActivity {
                 }
             }
         });
-        ref.child("Store Owner").child(str).child("orders").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        ref.child("Store Owner").child(storeName).child("orders").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()) {
@@ -92,31 +92,12 @@ public class ConfirmMainActivity extends AppCompatActivity {
                 }
                 else {
                     int count_child = (int) task.getResult().getChildrenCount();
-                    write_to_database(ref.child("Store Owner").child(str).child("orders").child(String.valueOf(count_child+1)),input);
+                    write_to_database(ref.child("Store Owner").child(storeName).child("orders").child(String.valueOf(count_child+1)),input);
                 }
             }
         });
-        Totalprice.setText(String.valueOf(CaculateTotalPrice()));
+        totalPrice.setText(String.valueOf(CalculateTotalPrice()));
         setAdapter();
-
-        /* ValueEventListener listener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                int count_child = 0;
-                count_child = (int) dataSnapshot.child("Customer").child("test").child("orders").getChildrenCount();
-                write_to_database(ref.child("Customer").child("test").child("orders").child("Order" + String.valueOf(count_child+1)),input);
-                setAdapter();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.i("demo_2", "Failed to read value.", error.toException());
-            }
-        };
-        ref.addValueEventListener(listener);
-
-         */
     }
 
     private void write_to_database(DatabaseReference databaseReference, Order input){

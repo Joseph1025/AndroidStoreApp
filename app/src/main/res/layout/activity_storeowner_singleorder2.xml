@@ -7,23 +7,25 @@
 
     <TextView
         android:id="@+id/storeowner_textView22"
-        android:layout_width="100dp"
+        android:layout_width="200dp"
         android:layout_height="25dp"
-        android:layout_marginStart="100dp"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="263dp"
+        android:layout_marginEnd="136dp"
         android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/storeowner_orderdetail"
+        app:layout_constraintHorizontal_bias="0.178"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.521" />
 
     <Button
         android:id="@+id/storeowner_orderdetail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="60dp"
+        android:layout_marginEnd="40dp"
         android:layout_marginBottom="20dp"
         android:text="detail"
         app:layout_constraintBottom_toBottomOf="parent"
