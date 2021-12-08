@@ -17,7 +17,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-    public class MyorderMainActivity extends AppCompatActivity {
+    public class MyorderMainActivity extends AppCompatActivity implements SetAdapter, SetUserInfo{
         private ArrayList<String> orders;
         private ArrayList<String> cusNames;
         private ArrayList<String> orderIds;
@@ -36,13 +36,13 @@ import java.util.ArrayList;
             orderIds = new ArrayList<>();
             recyclerView = findViewById(R.id.storeowner_orders_recyclerview);
             storename = getIntent().getStringExtra("username");
-            setUserInfo(storename);
+            setUserInfo();
             setAdapter();
 
 
 
         }
-        private void setAdapter() {
+        public void setAdapter() {
             setOnClickListener();
             this.adapter = new MyorderRecyclerAdapter(orders,listener);
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
@@ -69,7 +69,7 @@ import java.util.ArrayList;
 
         }
 
-        private void setUserInfo(String storename) {
+        public void setUserInfo() {
             DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Store Owner");
             DatabaseReference subref = ref.child(storename).child("orders");
             subref.addValueEventListener(new ValueEventListener() {

@@ -20,7 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class MyproductMainActivity extends AppCompatActivity {
+public class MyproductMainActivity extends AppCompatActivity implements SetUserInfo, SetAdapter{
 
     public static final String PRODUCT_NAME = "com.example.StoreOwner.MESSAGE";
     private ArrayList<String> productsList;
@@ -48,7 +48,7 @@ public class MyproductMainActivity extends AppCompatActivity {
 
     }
 
-    private void setAdapter() {
+    public void setAdapter() {
         setOnClickListener();
         MyproductRecyclerAdapter adapter = new MyproductRecyclerAdapter(productsList,listener);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
@@ -84,7 +84,7 @@ public class MyproductMainActivity extends AppCompatActivity {
     }
 
 
-    private void setUserInfo() {
+    public void setUserInfo() {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Store Owner");
         // need to get the store name and add their products to productsList
         ValueEventListener listener = new ValueEventListener() {

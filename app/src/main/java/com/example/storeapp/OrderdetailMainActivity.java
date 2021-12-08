@@ -21,7 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class OrderdetailMainActivity extends AppCompatActivity {
+public class OrderdetailMainActivity extends AppCompatActivity implements SetAdapter, SetUserInfo{
     private ArrayList<Product> products;
     private String customername;
     private String storename;
@@ -41,12 +41,12 @@ public class OrderdetailMainActivity extends AppCompatActivity {
         orderId = intent.getStringExtra("ORDER_ID");
 
         //I need an order based on intent customername and storename;
-        setUserinf();
+        setUserInfo();
         setAdapter();
 
 
     }
-    private void setAdapter() {
+    public void setAdapter() {
         this.adapter = new OrderdetailRecyclerAdapter(products);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
@@ -112,7 +112,7 @@ public class OrderdetailMainActivity extends AppCompatActivity {
 
     }
 
-    public void setUserinf(){
+    public void setUserInfo(){
         /**
          * Update </order> with all the orders of the store.
          */
