@@ -10,15 +10,13 @@
         android:id="@+id/reg_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="278dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginBottom="88dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="52dp"
         android:ems="10"
         android:inputType="textPassword"
         android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_store_owner"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reg_name"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
@@ -38,12 +36,11 @@
         android:id="@+id/reg_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="172dp"
+        android:layout_marginTop="150dp"
         android:layout_marginEnd="52dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -64,21 +61,30 @@
         android:id="@+id/btn_customer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="156dp"
+        android:layout_marginTop="40dp"
         android:text="Sign Up as customer"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_store_owner" />
 
     <Button
         android:id="@+id/btn_store_owner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
+        android:layout_marginTop="50dp"
         android:text="Sign Up As store Owner"
-        app:layout_constraintBottom_toTopOf="@+id/btn_customer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_hint_text" />
+
+    <TextView
+        android:id="@+id/login_hint_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reg_password" />
 </androidx.constraintlayout.widget.ConstraintLayout>
