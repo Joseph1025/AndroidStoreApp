@@ -24,10 +24,11 @@ public class ConfirmMainActivity extends AppCompatActivity {
     private ArrayList<Product> order;
     private RecyclerView recyclerView;
     private ConfirmRecyclerAdapter adapter;
-    private TextView text;
     private String storeName;
     private TextView totalPrice;
     private String username;
+    private int id;
+    private TextView text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +72,7 @@ public class ConfirmMainActivity extends AppCompatActivity {
     private void add_order_to_database(){
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         Order input = new Order(ProductMainActivity.products, storeName, username);
+        //child("Customer").child(username).child("orders").get().
         ref.child("Customer").child(username).child("orders").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -79,12 +81,15 @@ public class ConfirmMainActivity extends AppCompatActivity {
                 }
                 else {
                     int count_child = (int) task.getResult().getChildrenCount();
-                    input.setOrderId(count_child + 1);
-                    write_to_database(ref.child("Customer").child(username).child("orders").child(input.getOrderId()),input);
+                    //input.setOrderId(count_child + 1);
+                    id = count_child + 1;
+                    String key = input.getOrderId() + Integer.toString(id);
+                    write_to_database(ref.child("Customer").child(username).child("orders").child(key),input);
 
                 }
             }
         });
+
         ref.child("Store Owner").child(storeName).child("orders").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -93,7 +98,8 @@ public class ConfirmMainActivity extends AppCompatActivity {
                 }
                 else {
                     //int count_child = (int) task.getResult().getChildrenCount();
-                    write_to_database(ref.child("Store Owner").child(storeName).child("orders").child(input.getOrderId()),input);
+                    String key = input.getOrderId() + Integer.toString(id);
+                    write_to_database(ref.child("Store Owner").child(storeName).child("orders").child(key),input);
                 }
             }
         });
