@@ -68,6 +68,15 @@ public class CustomerOrderMainActivity extends AppCompatActivity {
                 orders = new ArrayList<>();
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     String str = child.getKey();
+                    boolean status = false;
+                    for(DataSnapshot temp : child.getChildren()){
+                        if(temp.getKey().equals("status")){
+                            if(temp.getValue(Boolean.class).equals(true))
+                                status = true;
+                        }
+                    }
+                    if(!status) str = str.concat(": is not completed");
+                    if(status) str = str.concat(": is completed");
                     orders.add(str);
                 }
                 setAdapter();
