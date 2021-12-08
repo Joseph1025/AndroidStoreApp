@@ -5,7 +5,6 @@ package com.example.storeapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,7 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class OrderdetailMainActivity extends AppCompatActivity implements SetAdapter, SetUserInfo{
+public class OrderdetailMainActivity extends AppCompatActivity implements RecyclerAdapterForm {
     private ArrayList<Product> products;
     private String customername;
     private String storename;

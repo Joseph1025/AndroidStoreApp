@@ -18,7 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class StoreMainActivity extends AppCompatActivity implements SetAdapter, SetUserInfo{
+public class StoreMainActivity extends AppCompatActivity implements RecyclerAdapterForm {
 
     private ArrayList<String> storesList;
     private RecyclerView recyclerView;

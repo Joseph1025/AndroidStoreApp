@@ -20,7 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class MyproductMainActivity extends AppCompatActivity implements SetUserInfo, SetAdapter{
+public class MyproductMainActivity extends AppCompatActivity implements RecyclerAdapterForm {
 
     public static final String PRODUCT_NAME = "com.example.StoreOwner.MESSAGE";
     private ArrayList<String> productsList;

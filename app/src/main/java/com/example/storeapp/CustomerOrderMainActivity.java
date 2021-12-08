@@ -19,7 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class CustomerOrderMainActivity extends AppCompatActivity implements SetUserInfo, SetAdapter{
+public class CustomerOrderMainActivity extends AppCompatActivity implements RecyclerAdapterForm {
     private ArrayList<String> orders;
     private RecyclerView recyclerView;
     private CustomerOrderRecyclerAdapter adapter;
