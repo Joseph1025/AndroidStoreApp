@@ -11,10 +11,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class LoginPresenter {
-    private View view;
+    public View view;
+    public LoginModel model;
 
     public LoginPresenter(View view) {
         this.view = view;
+        model = new LoginModel();
     }
 
     public void userLogin(String userType){
@@ -22,38 +24,23 @@ public class LoginPresenter {
         String password = view.getPassWord();
 
         if(name.equals("") || password.equals("")){
-            view.displayMessage("user name/ password cannot be empty");
+            view.displayMessage("username/password cannot be empty");
         }else{
-            FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
-            DatabaseReference reference = rootNode.getReference(userType);
-
-            reference.addListenerForSingleValueEvent(
-                new ValueEventListener(){
-                    @Override
-                    public void onDataChange(DataSnapshot snapshot) {
-                        if (!snapshot.hasChild(name)) {
-                            // The child doesn't exist
-                            Log.v(name, "you don't exist");
-                            view.displayMessage("wrong user name, please try again!");
-                        }else{
-                            if(snapshot.child(name).child("password").getValue().toString().equals(password)){
-                                Log.v(name, "logged in success");
-                                if(userType.equals("Customer")){
-                                    view.navigateToCusPage();
-                                }else if(userType.equals("Store Owner")){
-                                    view.navigateToStrPage();
-                                }
-                            }else{
-                                view.displayMessage("wrong password, please try again!");
-                            }
-                        }
-                    }
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                    }
-                });
+            model.userLogin(name, password, userType, this);
         }
     }
+
+    public static void loginSuccess(String userType, View view){
+        if(userType.equals("Customer")){
+            view.navigateToCusPage();
+        }else if(userType.equals("Store Owner")){
+            view.navigateToStrPage();
+        }
+    }
+    public static void loginFailed(View view){
+        view.displayMessage("wrong username/password, please try again");
+    }
+
     public interface View {
         String getUserName();
         String getPassWord();

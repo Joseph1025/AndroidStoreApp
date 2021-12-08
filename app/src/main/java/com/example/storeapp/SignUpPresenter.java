@@ -12,6 +12,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Map;
+
 public class SignUpPresenter {
     private SignUpPresenter.View view;
     private User user;
@@ -52,6 +54,7 @@ public class SignUpPresenter {
                             view.displayMessage("registered successfully");
                         }else{
                             Log.v(name, "u exist!!!");
+                            view.displayMessage("username already taken");
                         }
                     }
                     @Override

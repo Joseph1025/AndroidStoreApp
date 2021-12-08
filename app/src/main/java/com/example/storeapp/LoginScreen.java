@@ -29,7 +29,6 @@ public class LoginScreen extends AppCompatActivity implements LoginPresenter.Vie
                 new View.OnClickListener(){
                     @Override
                     public void onClick(View view){
-                        //presenter.getUser("Customer");
                         presenter.userLogin("Customer");
                     }
                 });
@@ -37,7 +36,6 @@ public class LoginScreen extends AppCompatActivity implements LoginPresenter.Vie
                 new View.OnClickListener(){
                     @Override
                     public void onClick(View view){
-                        //presenter.getUser("Store Owner");
                         presenter.userLogin("Store Owner");
                     }
                 }
