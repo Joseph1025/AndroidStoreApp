@@ -61,7 +61,7 @@ public class CustomerOrderMainActivity extends AppCompatActivity {
 
     private void setUserInfo() {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Customer");
-        ref = ref.child("test").child("orders");
+        ref = ref.child(username).child("orders");
         ValueEventListener listener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
