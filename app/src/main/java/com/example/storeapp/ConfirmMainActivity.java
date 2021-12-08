@@ -44,6 +44,7 @@ public class ConfirmMainActivity extends AppCompatActivity {
         textView.setText(storeName);
         totalPrice =(TextView)findViewById(R.id.confirm_totalprice);
         add_order_to_database();
+        add_order_to_store();
 
     }
     private int CalculateTotalPrice(){
@@ -90,6 +91,26 @@ public class ConfirmMainActivity extends AppCompatActivity {
             }
         });
 
+//        ref.child("Store Owner").child(storeName).child("orders").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<DataSnapshot> task) {
+//                if (!task.isSuccessful()) {
+//                    Log.e("demo", "Error getting data", task.getException());
+//                }
+//                else {
+//                    //int count_child = (int) task.getResult().getChildrenCount();
+//                    String key = input.getOrderId() + Integer.toString(id);
+//                    write_to_database(ref.child("Store Owner").child(storeName).child("orders").child(key),input);
+//                }
+//            }
+//        });
+//        totalPrice.setText(String.valueOf(CalculateTotalPrice()));
+//        setAdapter();
+    }
+
+    private void add_order_to_store() {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+        Order input = new Order(ProductMainActivity.products, storeName, username);
         ref.child("Store Owner").child(storeName).child("orders").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -103,6 +124,7 @@ public class ConfirmMainActivity extends AppCompatActivity {
                 }
             }
         });
+
         totalPrice.setText(String.valueOf(CalculateTotalPrice()));
         setAdapter();
     }
