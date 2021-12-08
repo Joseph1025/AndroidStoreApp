@@ -49,6 +49,8 @@ public class SignUpPresenter {
                         if (!snapshot.hasChild(name)) {
                             Log.v(name, "you don't exist yet");
                             reference.child(name).setValue(new_user);
+                            view.signUpSuccess();
+                            view.navigateToLogin();
                         }else{
                             Log.v(name, "u exist!!!");
                         }
@@ -64,5 +66,7 @@ public class SignUpPresenter {
         String getUserName();
         String getPassWord();
         void showEmptyText();
+        void signUpSuccess();
+        void navigateToLogin();
     }
 }

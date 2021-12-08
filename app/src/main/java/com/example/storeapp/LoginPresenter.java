@@ -12,14 +12,14 @@ import com.google.firebase.database.ValueEventListener;
 
 public class LoginPresenter {
     private View view;
-    private User user;
+    //private User user;
 
     public LoginPresenter(View view) {
-        this.user = null;
+        //this.user = null;
         this.view = view;
     }
 
-    public void getUser(String userType){
+    /*public void getUser(String userType){
         String name = view.getUserName();
         String password = view.getPassWord();
         if(userType == "Customer"){
@@ -27,7 +27,7 @@ public class LoginPresenter {
         }else if(userType == "Store Owner"){
             this.user = new StoreOwner(name, password);
         }
-    }
+    }*/
 
     public void userLogin(String userType){
         String name = view.getUserName();
@@ -48,6 +48,7 @@ public class LoginPresenter {
                         if (!snapshot.hasChild(name)) {
                             // The child doesn't exist
                             Log.v(name, "you don't exist");
+                            view.wrongUserName();
                         }else{
                             if(snapshot.child(name).child("password").getValue().toString().equals(password)){
                                 Log.v(name, "logged in success");
@@ -56,6 +57,8 @@ public class LoginPresenter {
                                 }else if(userType.equals("Store Owner")){
                                     view.navigateToStrPage();
                                 }
+                            }else{
+                                view.wrongPassword();
                             }
                         }
                     }
@@ -71,6 +74,7 @@ public class LoginPresenter {
         void navigateToCusPage();
         void navigateToStrPage();
         void showEmptyText();
-        void SignUpSuccess();
+        void wrongUserName();
+        void wrongPassword();
     }
 }

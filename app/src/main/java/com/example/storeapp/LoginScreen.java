@@ -29,7 +29,7 @@ public class LoginScreen extends AppCompatActivity implements LoginPresenter.Vie
                 new View.OnClickListener(){
                     @Override
                     public void onClick(View view){
-                        presenter.getUser("Customer");
+                        //presenter.getUser("Customer");
                         presenter.userLogin("Customer");
                     }
                 });
@@ -37,7 +37,7 @@ public class LoginScreen extends AppCompatActivity implements LoginPresenter.Vie
                 new View.OnClickListener(){
                     @Override
                     public void onClick(View view){
-                        presenter.getUser("Store Owner");
+                        //presenter.getUser("Store Owner");
                         presenter.userLogin("Store Owner");
                     }
                 }
@@ -87,8 +87,15 @@ public class LoginScreen extends AppCompatActivity implements LoginPresenter.Vie
     }
 
     @Override
-    public void SignUpSuccess() {
+    public void wrongUserName() {
+        TextView hint = (TextView)findViewById(R.id.hint_text);
+        hint.setText("invalid user name, please try again");
+    }
 
+    @Override
+    public void wrongPassword() {
+        TextView hint = (TextView)findViewById(R.id.hint_text);
+        hint.setText("invalid password, please try again");
     }
 
     @Override
