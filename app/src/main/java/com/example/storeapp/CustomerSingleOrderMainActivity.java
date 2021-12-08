@@ -67,7 +67,8 @@ public class CustomerSingleOrderMainActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 order = new ArrayList<>();
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
-                    if(child.getKey().equals(order_name)){
+                    String temp_1 = order_name.split(":")[0];
+                    if(child.getKey().equals(temp_1)){
                         // at test_store node
                         ArrayList<Product> temp = setProduct(child);
                         order.addAll(temp);
