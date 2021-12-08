@@ -26,7 +26,7 @@ public class ProductMainActivity extends AppCompatActivity {
     private ProductRecyclerAdapter adapter;
     private ItemClickListener listener;
     private TextView text;
-    private String storename;
+    private String storeName;
     private String username;
     private boolean empty = true;
 
@@ -37,12 +37,11 @@ public class ProductMainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.product_recyclerview);
         products = new ArrayList<>();
         Intent intent = getIntent();
-        storename = intent.getStringExtra("storename");
+        storeName = intent.getStringExtra("storename");
         username = intent.getStringExtra("username");
         TextView textView = findViewById(R.id.singlestorename);
-        textView.setText(storename);
-        setUserInfo(storename);
-
+        textView.setText(storeName);
+        setUserInfo();
     }
 
     private void setAdapter() {
@@ -65,20 +64,19 @@ public class ProductMainActivity extends AppCompatActivity {
         };
     }
 
-
-    public void checkorder(){
+    public void checkOrder(){
         for(Product p:products){
             if (p.getProductCount() !=0){
-                empty =false;
+                empty = false;
             }
         }
     }
 
     public void confirm(View v){
-        checkorder();
-        if(empty == false) {
+        checkOrder();
+        if(!empty) {
             Intent intent = new Intent(this, ConfirmMainActivity.class);
-            intent.putExtra("storename", storename);
+            intent.putExtra("storename", storeName);
             intent.putExtra("username", username);
             startActivity(intent);
         }
@@ -87,8 +85,7 @@ public class ProductMainActivity extends AppCompatActivity {
         }
     }
 
-    private void setUserInfo(String message) {
-
+    private void setUserInfo() {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Store Owner");
         // need to get the store name and add their products to productsList
         ValueEventListener listener = new ValueEventListener() {
@@ -96,7 +93,7 @@ public class ProductMainActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 products = new ArrayList<>();
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
-                    if(child.getKey().equals(message)){
+                    if(child.getKey().equals(storeName)){
                         // at test_store node
                         ArrayList<Product> temp = setProduct(child);
                         products.addAll(temp);
@@ -117,7 +114,6 @@ public class ProductMainActivity extends AppCompatActivity {
     // give a store name, get all it's products list
     private ArrayList<Product> setProduct(DataSnapshot child){
         ArrayList<Product> product = new ArrayList<>();
-
         for (DataSnapshot temp : child.getChildren()) {
             if(temp.getKey().equals("products")){
                 for(DataSnapshot temp_2 : temp.getChildren()){
@@ -146,7 +142,6 @@ public class ProductMainActivity extends AppCompatActivity {
             }
         }
         return product;
-
     }
 }
 

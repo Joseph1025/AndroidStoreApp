@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextClock;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,9 +25,9 @@ public class CustomerSingleOrderMainActivity extends AppCompatActivity {
     private SingleOrderRecyclerAdapter adapter;
     private TextView text1;
     private TextView text2;
-    private TextView Totalprice;
+    private TextView totalPrice;
     private String username;
-    private String ordername;
+    private String order_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,22 +36,21 @@ public class CustomerSingleOrderMainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.productlayoutrecyclerview);
         order = new ArrayList<>();
         username = getIntent().getStringExtra("username");
-        ordername = getIntent().getStringExtra("ordername");
+        order_name = getIntent().getStringExtra("ordername");
         text1 = (TextView)findViewById(R.id.productlayout);
         text2 = (TextView)findViewById(R.id.notification);
-        Totalprice =(TextView)findViewById(R.id.totalprice);
-
-        setUserInfo(username, ordername);
-
-
+        totalPrice =(TextView)findViewById(R.id.totalprice);
+        setUserInfo();
     }
-    private int CaculateTotalPrice(){
+
+    private int CalculateTotalPrice(){
         int totalprice = 0;
         for (Product p: order){
             totalprice += p.getPrice()*p.getProductCount();
         }
         return totalprice;
     }
+
     private void setAdapter() {
         this.adapter = new SingleOrderRecyclerAdapter(order);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
@@ -61,7 +59,7 @@ public class CustomerSingleOrderMainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
-    private void setUserInfo(String username, String order_name) {
+    private void setUserInfo() {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Customer");
         ref = ref.child(username).child("orders");
         ValueEventListener listener = new ValueEventListener() {
@@ -76,16 +74,8 @@ public class CustomerSingleOrderMainActivity extends AppCompatActivity {
                         Log.d("demo", String.valueOf(temp.size()));
                     }
                 }
-                Totalprice.setText(String.valueOf(CaculateTotalPrice()));
+                totalPrice.setText(String.valueOf(CalculateTotalPrice()));
                 setAdapter();
-                /*
-                for (DataSnapshot child : dataSnapshot.getChildren()) {
-                    String str = child.getKey();
-                    order.add(str);
-                }
-                setAdapter();
-
-                 */
             }
             @Override
             public void onCancelled(DatabaseError error) {
@@ -94,11 +84,10 @@ public class CustomerSingleOrderMainActivity extends AppCompatActivity {
             }
         };
         ref.addValueEventListener(listener);
-
     }
+
     private ArrayList<Product> setProduct(DataSnapshot child){
         ArrayList<Product> product = new ArrayList<>();
-
         for (DataSnapshot temp : child.getChildren()) {
             if(temp.getKey().equals("products")){
                 for(DataSnapshot temp_2 : temp.getChildren()){
@@ -133,7 +122,6 @@ public class CustomerSingleOrderMainActivity extends AppCompatActivity {
         }
         return product;
     }
-
 
     public void click_back_order(View v){
         Intent intent = new Intent(this, CustomerMainActivity.class);
