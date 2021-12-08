@@ -9,9 +9,6 @@
         <entry key="..\:/Users/86153/Documents/GitHub/CSCB07_Project/StoreApp/app/src/main/res/layout/activity_login_screen.xml" value="0.4" />
         <entry key="..\:/Users/86153/Documents/GitHub/CSCB07_Project/StoreApp/app/src/main/res/layout/activity_sign_up_screen.xml" value="0.4" />
         <entry key="..\:/Users/86153/Documents/GitHub/CSCB07_Project/StoreApp/app/src/main/res/layout/activity_store_owner_page.xml" value="0.264" />
-        <entry key="..\:/github/AndroidStoreApp/app/src/main/res/layout/activity_singleorderlayout.xml" value="0.5" />
-        <entry key="..\:/github/AndroidStoreApp/app/src/main/res/layout/activity_singleordermain.xml" value="0.33489583333333334" />
-        <entry key="..\:/github/AndroidStoreApp/app/src/main/res/layout/activity_singleorders.xml" value="0.75" />
         <entry key="..\:/github/CSCB07_Project/StoreApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.11145833333333334" />
         <entry key="..\:/github/CSCB07_Project/StoreApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.359375" />
         <entry key="..\:/github/CSCB07_Project/StoreApp/app/src/main/res/layout/activity_confirmitems.xml" value="0.3390625" />
@@ -28,12 +25,13 @@
         <entry key="app/src/main/res/layout/activity_confirmitems.xml" value="0.5376486129458389" />
         <entry key="app/src/main/res/layout/activity_confirmmain.xml" value="0.44740024183796856" />
         <entry key="app/src/main/res/layout/activity_customermain.xml" value="0.13411681763855224" />
+        <entry key="app/src/main/res/layout/activity_login_screen.xml" value="0.14564336372847012" />
         <entry key="app/src/main/res/layout/activity_ordersmain.xml" value="0.11730072463768115" />
         <entry key="app/src/main/res/layout/activity_productmain.xml" value="0.14564336372847012" />
         <entry key="app/src/main/res/layout/activity_showproductmain.xml" value="0.14564336372847012" />
         <entry key="app/src/main/res/layout/activity_singleorderlayout.xml" value="0.5107505486803493" />
         <entry key="app/src/main/res/layout/activity_singleordermain.xml" value="0.5" />
-        <entry key="app/src/main/res/layout/activity_singleorders.xml" value="0.9298812779011638" />
+        <entry key="app/src/main/res/layout/activity_singleorders.xml" value="1.0477146959829176" />
         <entry key="app/src/main/res/layout/activity_singleproduct.xml" value="0.39556962025316456" />
         <entry key="app/src/main/res/layout/activity_singlestore.xml" value="0.14564336372847012" />
         <entry key="app/src/main/res/layout/activity_storemain.xml" value="0.14564336372847012" />
