@@ -28,11 +28,14 @@ public class ShowproductMainActivity extends AppCompatActivity {
         prodName = message;
         String des = intent.getStringExtra("DES");
         storeName = intent.getStringExtra("STORE_NAME");
+        String price = intent.getStringExtra("PRICE");
         // Capture the layout's TextView and set the string as its text
         TextView textView = findViewById(R.id.storeowner_storeowner_productname2);
         textView.setText(message);
         TextView textView2 = findViewById(R.id.storeowner_description);
+        TextView textView3 = findViewById(R.id.storeowner_price);
         textView2.setText(des);
+        textView3.setText(price);
     }
 
     public void deletemyproducts(View v){

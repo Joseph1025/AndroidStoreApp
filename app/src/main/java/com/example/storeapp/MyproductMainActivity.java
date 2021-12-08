@@ -64,9 +64,12 @@ public class MyproductMainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), ShowproductMainActivity.class);
                 String message = productsList.get(position);
                 String des = prodList.get(position).getDescription();
+                int pr = prodList.get(position).getPrice();
+                String price = String.valueOf(pr);
                 intent.putExtra("PRODUCT_NAME", message);
                 intent.putExtra("DES", des);
                 intent.putExtra("STORE_NAME", storeName);
+                intent.putExtra("PRICE",price);
                 startActivity(intent);
             }
         };
