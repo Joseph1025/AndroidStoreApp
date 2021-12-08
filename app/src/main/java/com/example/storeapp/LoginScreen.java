@@ -5,14 +5,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class LoginScreen extends AppCompatActivity implements StartUpPresenter.View {
+public class LoginScreen extends AppCompatActivity implements LoginPresenter.View {
     Button btnCustomer, btnStoreOwner, signUp;
     EditText logName, logPassword;
 
-    StartUpPresenter presenter;
+    LoginPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,47 +23,45 @@ public class LoginScreen extends AppCompatActivity implements StartUpPresenter.V
         btnCustomer = (Button)findViewById(R.id.onCusLogin);
         btnStoreOwner = (Button)findViewById(R.id.onStrLogin);
         signUp = (Button)findViewById(R.id.onSignUp);
-        logName = (EditText)findViewById(R.id.name_input);
-        logPassword = (EditText)findViewById(R.id.passward_input);
-        presenter = new StartUpPresenter(this);
+        presenter = new LoginPresenter(this);
 
         btnCustomer.setOnClickListener(
-            new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                String name = logName.getText().toString();
-                String password = logPassword.getText().toString();
-                presenter.getUser(name, password, "Customer");
-                presenter.userLogin(name, password, "Customer");
-        }
-        });
-        //presenter = new StartUpPresenter(this);
+                new View.OnClickListener(){
+                    @Override
+                    public void onClick(View view){
+                        //presenter.getUser("Customer");
+                        presenter.userLogin("Customer");
+                    }
+                });
         btnStoreOwner.setOnClickListener(
-            new View.OnClickListener(){
-                @Override
-                public void onClick(View view){
-                    String name = logName.getText().toString();
-                    String password = logPassword.getText().toString();
-                    presenter.getUser(name, password, "Store Owner");
-                    presenter.userLogin(name, password, "Store Owner");
+                new View.OnClickListener(){
+                    @Override
+                    public void onClick(View view){
+                        //presenter.getUser("Store Owner");
+                        presenter.userLogin("Store Owner");
+                    }
                 }
-            }
         );
-
-
         signUp.setOnClickListener(
-            new View.OnClickListener(){
-                public void onClick(View view){
-                    Intent signUpIntent = new Intent(LoginScreen.this, SignUpScreen.class);
-                    startActivity(signUpIntent);
+                new View.OnClickListener(){
+                    public void onClick(View view){
+                        Intent signUpIntent = new Intent(LoginScreen.this, SignUpScreen.class);
+                        startActivity(signUpIntent);
+                    }
                 }
-            }
         );
     }
 
+    @Override
     public String getUserName(){
         logName = (EditText)findViewById(R.id.name_input);
         return logName.getText().toString();
+    }
+
+    @Override
+    public String getPassWord() {
+        logPassword = (EditText)findViewById(R.id.passward_input);
+        return logPassword.getText().toString();
     }
 
     @Override
@@ -79,6 +78,12 @@ public class LoginScreen extends AppCompatActivity implements StartUpPresenter.V
         Intent strPage = new Intent(LoginScreen.this, StoreOwnerMainActivity.class);
         strPage.putExtra("username", getUserName());
         startActivity(strPage);
+    }
+
+    @Override
+    public void displayMessage(String s) {
+        TextView hint = (TextView)findViewById(R.id.hint_text);
+        hint.setText(s);
     }
 
     @Override

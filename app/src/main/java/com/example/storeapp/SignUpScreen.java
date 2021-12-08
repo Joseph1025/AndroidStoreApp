@@ -5,67 +5,72 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class SignUpScreen extends AppCompatActivity implements StartUpPresenter.View{
+public class SignUpScreen extends AppCompatActivity implements SignUpPresenter.View{
     EditText regName, regPassword;
-    Button btnCustomer, btnStoreOwner;
+    Button btnCustomer, btnStoreOwner, btnBack;
 
-    StartUpPresenter presenter;
+    SignUpPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_screen);
 
-        regName = findViewById(R.id.reg_name);
-        regPassword = findViewById(R.id.reg_password);
         btnCustomer = findViewById(R.id.btn_customer);
         btnStoreOwner = findViewById(R.id.btn_store_owner);
-        presenter = new StartUpPresenter(this);
+        btnBack = findViewById(R.id.btn_back);
+        presenter = new SignUpPresenter(this);
 
         btnCustomer.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                String name = regName.getText().toString();
-                String password = regPassword.getText().toString();
-
-                presenter.getUser(name, password, "Customer");
+                presenter.getUser("Customer");
                 presenter.addUser("Customer");
-                Intent back = new Intent(SignUpScreen.this, LoginScreen.class);
-                startActivity(back);
             }
         });
 
         btnStoreOwner.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                String name = regName.getText().toString();
-                String password = regPassword.getText().toString();
-
-                presenter.getUser(name, password, "Store Owner");
+                presenter.getUser("Store Owner");
                 presenter.addUser("Store Owner");
-                Intent back = new Intent(SignUpScreen.this, LoginScreen.class);
-                startActivity(back);
+            }
+        });
+
+        btnBack.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                navigateToLogin();
             }
         });
     }
 
-//    public String getUserName(){
-//        logName = (EditText)findViewById(R.id.name_input);
-//        return logName.getText().toString();
-//    }
-
     @Override
-    public void navigateToCusPage() {
-//        Intent cusPage = new Intent(SignUpScreen.this, CustomerMainActivity.class);
-//        cusPage.putExtra("username", getUserName());
-//        startActivity(cusPage);
+    public String getUserName() {
+        regName = findViewById(R.id.reg_name);
+        return regName.getText().toString();
     }
 
     @Override
-    public void navigateToStrPage() {
-
+    public String getPassWord() {
+        regPassword = findViewById(R.id.reg_password);
+        return regPassword.getText().toString();
     }
+
+    @Override
+    public void displayMessage(String s) {
+        TextView hint = (TextView)findViewById(R.id.login_hint_text);
+        hint.setText(s);
+    }
+
+    @Override
+    public void navigateToLogin() {
+        Intent logPage = new Intent(SignUpScreen.this, LoginScreen.class);
+        startActivity(logPage);
+    }
+
 }
