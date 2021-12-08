@@ -79,7 +79,8 @@ public class ConfirmMainActivity extends AppCompatActivity {
                 }
                 else {
                     int count_child = (int) task.getResult().getChildrenCount();
-                    write_to_database(ref.child("Customer").child(username).child("orders").child(String.valueOf(count_child+1)),input);
+                    input.setOrderId(count_child + 1);
+                    write_to_database(ref.child("Customer").child(username).child("orders").child(input.getOrderId()),input);
 
                 }
             }
@@ -91,8 +92,8 @@ public class ConfirmMainActivity extends AppCompatActivity {
                     Log.e("demo", "Error getting data", task.getException());
                 }
                 else {
-                    int count_child = (int) task.getResult().getChildrenCount();
-                    write_to_database(ref.child("Store Owner").child(storeName).child("orders").child(String.valueOf(count_child+1)),input);
+                    //int count_child = (int) task.getResult().getChildrenCount();
+                    write_to_database(ref.child("Store Owner").child(storeName).child("orders").child(input.getOrderId()),input);
                 }
             }
         });
@@ -103,6 +104,7 @@ public class ConfirmMainActivity extends AppCompatActivity {
     private void write_to_database(DatabaseReference databaseReference, Order input){
         String store_name = input.getStore_order();
         String customer_name = input.getCustomer_order();
+        String orderId = input.getOrderId();
         ArrayList<Product> products = input.getProducts();
         ArrayList<Product> input_product = new ArrayList<>();
         for(Product product:products){
@@ -113,6 +115,7 @@ public class ConfirmMainActivity extends AppCompatActivity {
         databaseReference.child("customer_order").setValue(customer_name);
         databaseReference.child("store_order").setValue(store_name);
         databaseReference.child("status").setValue(false);
+        databaseReference.child("orderId").setValue(orderId);
         for(int i = 0; i < input_product.size(); i++){
             databaseReference.child("products").child(input_product.get(i).getProductName()).setValue(input_product.get(i));
         }

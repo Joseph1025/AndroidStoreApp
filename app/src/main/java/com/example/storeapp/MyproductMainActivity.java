@@ -21,32 +21,6 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class MyproductMainActivity extends AppCompatActivity {
-/*
-    private ArrayList<Product> productsList;
-    private RecyclerView recyclerView;
-    private MyproductRecyclerAdapter.RecyclerViewClickListener listener;
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_myproductmain);
-        recyclerView = findViewById(R.id.products_recyclerview);
-        productsList = new ArrayList<>();
-
-        setUserInfo();
-
-    }
-
-    private void setAdapter() {
-        setOnClickListener();
-        MyproductRecyclerAdapter adapter = new MyproductRecyclerAdapter(productsList,listener);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(adapter);
-    }
-    */
 
     public static final String PRODUCT_NAME = "com.example.StoreOwner.MESSAGE";
     private ArrayList<String> productsList;
@@ -170,32 +144,13 @@ public class MyproductMainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(MyproductMainActivity.this, StoreOwnerMainActivity.class);
+        intent.putExtra("username", storeName);
+        startActivity(intent);
+    }
 
-//    public boolean getOwner(String name) {
-//        /**
-//         * Search for owner in firebase with its username,
-//         * then set @param owner to be the search result.
-//         * Return true if the search succeed, else return false.
-//         */
-//        FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
-//        DatabaseReference ownerRef = rootNode.getReference("Store Owner");
-//        final boolean[] found = {false};
-//        ownerRef.orderByChild("name").equalTo(name).addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                if (snapshot.getKey().equals(message)) {  // owner is found
-//
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//
-//        return found[0];
-//    }
 }
 
 

@@ -25,10 +25,9 @@ public class OrderdetailMainActivity extends AppCompatActivity {
     private ArrayList<Product> products;
     private String customername;
     private String storename;
-    private int orderId;
+    private String orderId;
     private RecyclerView recyclerView;
     private OrderdetailRecyclerAdapter adapter;
-    private TextView text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +38,7 @@ public class OrderdetailMainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         customername = intent.getStringExtra("customer_name");
         storename = intent.getStringExtra("STORE_NAME");
-        orderId = intent.getIntExtra("ORDER_ID", 0) + 1;
+        orderId = intent.getStringExtra("ORDER_ID");
 
         //I need an order based on intent customername and storename;
         setUserinf();
@@ -70,14 +69,32 @@ public class OrderdetailMainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void setStatus(int orderId) {
+    public void setStatus(String orderId) {
         /**
          * Update order of id <orderId></orderId>.
          * Set its status from false to true.
          */
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Store Owner");
-        ref = ref.child(storename).child("orders").child(Integer.toString(orderId));
+        ref = ref.child(storename).child("orders").child(orderId);
         ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot child: snapshot.getChildren()) {
+                    if (child.getKey().equals("status")) {
+                        child.getRef().setValue(true);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        DatabaseReference ref2 = FirebaseDatabase.getInstance().getReference("Customer");
+        ref2 = ref2.child(customername).child("orders").child(orderId);
+        ref2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot child: snapshot.getChildren()) {
@@ -100,7 +117,7 @@ public class OrderdetailMainActivity extends AppCompatActivity {
          * Update </order> with all the orders of the store.
          */
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Store Owner");
-        ref = ref.child(storename).child("orders").child(Integer.toString(orderId));
+        ref = ref.child(storename).child("orders").child(orderId);
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

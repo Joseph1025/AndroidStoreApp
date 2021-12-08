@@ -20,6 +20,7 @@ import java.util.ArrayList;
     public class MyorderMainActivity extends AppCompatActivity {
         private ArrayList<String> orders;
         private ArrayList<String> cusNames;
+        private ArrayList<String> orderIds;
         private RecyclerView recyclerView;
         private MyorderRecyclerAdapter adapter;
         private MyorderRecyclerAdapter.RecyclerViewClickListener1 listener;
@@ -32,6 +33,7 @@ import java.util.ArrayList;
             setContentView(R.layout.activity_myordersmain);
             orders = new ArrayList<>();
             cusNames = new ArrayList<>();
+            orderIds = new ArrayList<>();
             recyclerView = findViewById(R.id.storeowner_orders_recyclerview);
             storename = getIntent().getStringExtra("username");
             setUserInfo(storename);
@@ -59,7 +61,7 @@ import java.util.ArrayList;
 
                     intent.putExtra("customer_name",cusNames.get(position));
                     intent.putExtra("STORE_NAME", storename);
-                    intent.putExtra("ORDER_ID", position);
+                    intent.putExtra("ORDER_ID", orderIds.get(position));
 
                     startActivity(intent);
                 }
@@ -75,6 +77,7 @@ import java.util.ArrayList;
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     for (DataSnapshot child: snapshot.getChildren()) { // traversing at order-key level
+                        orderIds.add(child.getKey());
                         for (DataSnapshot grandChild: child.getChildren()) { // at certain order
                             boolean isComplete = false;
                             if (grandChild.getKey().equals("status")) {
@@ -105,9 +108,7 @@ import java.util.ArrayList;
             });
         }
 
-//        private Order orderWrapper() {
-//
-//        }
+
 
 
 

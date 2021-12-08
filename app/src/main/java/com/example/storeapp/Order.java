@@ -11,6 +11,7 @@ public class Order {
     private boolean complete = false;
     private String customer_order;
     private String store_order;
+    private String orderId;
 
     public String getCustomer_order() {
         return customer_order;
@@ -30,6 +31,7 @@ public class Order {
 
     public Order() {
         this.productList = new ArrayList<>();
+        this.orderId = customer_order + store_order;
     }
 
     public Order(ArrayList<Product> arrayList, String storeOwner){
@@ -42,36 +44,19 @@ public class Order {
         this.store_order = storeOwner;
         this.complete = false;
         this.customer_order = customer;
+        this.orderId = customer_order + store_order;
     }
 
     public ArrayList getProducts() {
         return productList;
     }
 
-    public void addProduct(Product p) {
-        /**
-         * Add product to order
-         */
-        this.productList.add(p);
+    public String getOrderId() {
+        return this.orderId;
     }
 
-    public void delProduct(Product p) {
-        /**
-         * Remove product from order
-         */
-        this.productList.remove(p);
-    }
-
-    public boolean getStatus() {
-        return this.complete;
-    }
-
-    public void setStatus() {
-        /**
-         * Change order to status 'complete'
-         * or vice versa
-         */
-        this.complete = !this.complete;
+    public void setOrderId(int id) {
+        this.orderId = orderId.concat(Integer.toString(id));
     }
 
 
