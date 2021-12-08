@@ -15,7 +15,7 @@ public class LoginModel {
     LoginModel(){
         userExist = false;
     }
-    public void userLogin(String name, String password, String userType, LoginPresenter p){
+    public void userLogin(String name, String password, String userType, LoginPresenter.View v){
         FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
         DatabaseReference reference = rootNode.getReference(userType);
 
@@ -25,13 +25,13 @@ public class LoginModel {
                 public void onDataChange(DataSnapshot snapshot) {
                     if (!snapshot.hasChild(name)) {
                         // The child doesn't exist
-                        LoginPresenter.loginFailed(p.view);
+                        LoginPresenter.loginFailed(v);
                     }else{
                         if(snapshot.child(name).child("password").getValue().toString().equals(password)){
                             Log.v(name, "logged in success");
-                            LoginPresenter.loginSuccess(userType, p.view);
+                            LoginPresenter.loginSuccess(userType, v);
                         }else{
-                            LoginPresenter.loginFailed(p.view);
+                            LoginPresenter.loginFailed(v);
                         }
                     }
                 }

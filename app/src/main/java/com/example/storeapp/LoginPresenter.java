@@ -14,9 +14,9 @@ public class LoginPresenter {
     public View view;
     public LoginModel model;
 
-    public LoginPresenter(View view) {
+    public LoginPresenter(View view, LoginModel model) {
         this.view = view;
-        model = new LoginModel();
+        this.model = model;
     }
 
     public void userLogin(String userType){
@@ -26,7 +26,7 @@ public class LoginPresenter {
         if(name.equals("") || password.equals("")){
             view.displayMessage("username/password cannot be empty");
         }else{
-            model.userLogin(name, password, userType, this);
+            model.userLogin(name, password, userType, this.view);
         }
     }
 

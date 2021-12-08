@@ -23,7 +23,7 @@ public class LoginScreen extends AppCompatActivity implements LoginPresenter.Vie
         btnCustomer = (Button)findViewById(R.id.onCusLogin);
         btnStoreOwner = (Button)findViewById(R.id.onStrLogin);
         signUp = (Button)findViewById(R.id.onSignUp);
-        presenter = new LoginPresenter(this);
+        presenter = new LoginPresenter(this, new LoginModel());
 
         btnCustomer.setOnClickListener(
                 new View.OnClickListener(){
